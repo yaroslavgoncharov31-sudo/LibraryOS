@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:LibraryOperationSystem}/LibraryOperationSystem",
+            "name": "Debug TextEditor (LibraryOperationSystem)",
+            "target": "TextEditor",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug TextEditor (LibraryOperationSystem)"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:LibraryOperationSystem}/LibraryOperationSystem",
+            "name": "Release TextEditor (LibraryOperationSystem)",
+            "target": "TextEditor",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release TextEditor (LibraryOperationSystem)"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:LibraryOperationSystem}/LibraryOperationSystem",
+            "name": "Debug LibraryOperationSystem (LibraryOperationSystem)",
+            "target": "LibraryOperationSystem",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug LibraryOperationSystem (LibraryOperationSystem)"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:LibraryOperationSystem}/LibraryOperationSystem",
+            "name": "Release LibraryOperationSystem (LibraryOperationSystem)",
+            "target": "LibraryOperationSystem",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release LibraryOperationSystem (LibraryOperationSystem)"
+        }
+    ]
+}

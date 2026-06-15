@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:TextEditor}",
+            "name": "Debug TextEditor",
+            "target": "TextEditor",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug TextEditor"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:TextEditor}",
+            "name": "Release TextEditor",
+            "target": "TextEditor",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release TextEditor"
+        }
+    ]
+}
