@@ -1,11 +1,7 @@
-class Member {
-    let name: String
+import Foundation
+
+struct Member: Identifiable {
     let id: Int
-    var borrowedBooks: [Book] = []
-
-    init(name: String, id: Int) {
-        self.name = name
-        self.id = id
-    }    
-
+    let name: String
+    var borrowedBookCodes: Set<Int> = []
 }
