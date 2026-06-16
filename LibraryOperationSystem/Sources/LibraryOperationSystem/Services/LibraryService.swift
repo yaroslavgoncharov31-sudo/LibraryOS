@@ -1,18 +1,26 @@
 import Foundation
 
-actor Library {
-    private(set) var books: [Book] = []
-    private(set) var members: [Member] = []
+actor LibraryService {
+    private var books: [Book] = []
+    private var members: [Member] = []
 
-    var borrowedBookCodes: Set<Int> {
+    private var borrowedBookCodes: Set<Int> {
         Set(members.flatMap { $0.borrowedBookCodes })
     }
 
-    var availableBooks: [Book] {
+    func listAllBooks() -> [Book] {
+        books
+    }
+
+    func listAllMembers() -> [Member] {
+        members
+    }
+
+    func listAvailableBooks() -> [Book] {
         books.filter { !borrowedBookCodes.contains($0.id) }
     }
 
-    var borrowedBooks: [Book] {
+    func listBorrowedBooks() -> [Book] {
         books.filter { borrowedBookCodes.contains($0.id) }
     }
 

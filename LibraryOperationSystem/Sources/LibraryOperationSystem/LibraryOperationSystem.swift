@@ -3,11 +3,11 @@ import Foundation
 @main
 struct LibraryOperationSystem {
     static func main() async {
-        let library = Library()
-        await runApplication(using: library)
+        let libraryService = LibraryService()
+        await runApplication(using: libraryService)
     }
 
-    private static func runApplication(using library: Library) async {
+    private static func runApplication(using service: LibraryService) async {
         print("Welcome to LibraryOS")
 
         while true {
@@ -19,17 +19,17 @@ struct LibraryOperationSystem {
 
             switch choice {
             case 1:
-                await listAllBooks(library)
+                await listAllBooks(service)
             case 2:
-                await listAllMembers(library)
+                await listAllMembers(service)
             case 3:
-                await addBook(library)
+                await addBook(service)
             case 4:
-                await addMember(library)
+                await addMember(service)
             case 5:
-                await borrowBook(library)
+                await borrowBook(service)
             case 6:
-                await returnBook(library)
+                await returnBook(service)
             case 7:
                 print("Goodbye.")
                 return
@@ -50,9 +50,9 @@ struct LibraryOperationSystem {
         print("7. Exit")
     }
 
-    private static func listAllBooks(_ library: Library) async {
-        let books = await library.books
-        let borrowedBooks = await library.borrowedBooks
+    private static func listAllBooks(_ service: LibraryService) async {
+        let books = await service.listAllBooks()
+        let borrowedBooks = await service.listBorrowedBooks()
 
         guard !books.isEmpty else {
             print("No books available in the library.")
@@ -65,8 +65,8 @@ struct LibraryOperationSystem {
         }
     }
 
-    private static func listAllMembers(_ library: Library) async {
-        let members = await library.members
+    private static func listAllMembers(_ service: LibraryService) async {
+        let members = await service.listAllMembers()
 
         guard !members.isEmpty else {
             print("No members registered.")
@@ -79,7 +79,7 @@ struct LibraryOperationSystem {
         }
     }
 
-    private static func addBook(_ library: Library) async {
+    private static func addBook(_ service: LibraryService) async {
         guard let code = InputValidator.shared.readInt(prompt: "Enter book code:") else { return }
         guard let name = InputValidator.shared.readNonEmptyString(prompt: "Enter book name:") else { return }
         guard let author = InputValidator.shared.readNonEmptyString(prompt: "Enter book author:") else { return }
@@ -99,46 +99,47 @@ struct LibraryOperationSystem {
         let genre = Genre.allCases[genreIndex - 1]
 
         do {
-            try await library.addBook(code: code, name: name, author: author, genre: genre)
+            try await service.addBook(code: code, name: name, author: author, genre: genre)
             print("Book added successfully.")
         } catch {
             print("Failed to add book: \(error)")
         }
     }
 
-    private static func addMember(_ library: Library) async {
+    private static func addMember(_ service: LibraryService) async {
         guard let id = InputValidator.shared.readInt(prompt: "Enter member ID:") else { return }
         guard let name = InputValidator.shared.readNonEmptyString(prompt: "Enter member name:") else { return }
 
         do {
-            try await library.addMember(id: id, name: name)
+            try await service.addMember(id: id, name: name)
             print("Member added successfully.")
         } catch {
             print("Failed to add member: \(error)")
         }
     }
 
-    private static func borrowBook(_ library: Library) async {
+    private static func borrowBook(_ service: LibraryService) async {
         guard let memberID = InputValidator.shared.readInt(prompt: "Enter member ID:") else { return }
         guard let bookCode = InputValidator.shared.readInt(prompt: "Enter book code:") else { return }
 
         do {
-            try await library.borrowBook(bookCode: bookCode, memberID: memberID)
+            try await service.borrowBook(bookCode: bookCode, memberID: memberID)
             print("Book borrowed successfully.")
         } catch {
             print("Failed to borrow book: \(error)")
         }
     }
 
-    private static func returnBook(_ library: Library) async {
+    private static func returnBook(_ service: LibraryService) async {
         guard let memberID = InputValidator.shared.readInt(prompt: "Enter member ID:") else { return }
         guard let bookCode = InputValidator.shared.readInt(prompt: "Enter book code:") else { return }
 
         do {
-            try await library.returnBook(bookCode: bookCode, memberID: memberID)
+            try await service.returnBook(bookCode: bookCode, memberID: memberID)
             print("Book returned successfully.")
         } catch {
             print("Failed to return book: \(error)")
         }
     }
 }
+
