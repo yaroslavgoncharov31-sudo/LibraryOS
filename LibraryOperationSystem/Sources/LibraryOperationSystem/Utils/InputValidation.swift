@@ -13,5 +13,25 @@ final class InputValidator: Sendable {
         }
         return input
     }
+    func readBookCode() -> Int? {
+        print("Enter a book code:")
+        guard let input = readLine(),
+            let number = Int(input) else {
+                print("Invalid input.")
+                return nil
+            }
+            return number
+
+    }
+    func readMemberID() -> Int? {
+        print("Enter a member ID:")
+        guard let input = readLine(),
+            let number = Int(input) else {
+                print("Invalid input.")
+                return nil
+            }
+            return number
+
+    }
 }
 

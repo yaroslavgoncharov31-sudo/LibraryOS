@@ -1,17 +1,21 @@
 import Foundation
 
-@MainActor
 class Library {
 
     private init() {}
 
-    static let shared = Library()
+    @MainActor static let shared = Library()
     var members: [Member] = []
     var books: [Book] = []
     var availableBooks: [Book] {
-        books.filter { $0.status == .available }
+        books.filter { book in
+            !members.contains(where: { $0.borrowedBooksCodes.contains(book.code) } )
+        }
     }
     var borrowedBooks: [Book] {
-        books.filter { $0.status == .borrowed }
+         books.filter { book in
+            members.contains(where: { $0.borrowedBooksCodes.contains(book.code) } )
+        }
     }
 }
+

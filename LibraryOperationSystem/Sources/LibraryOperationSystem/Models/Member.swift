@@ -1,7 +1,7 @@
 class Member {
     let name: String
     let id: Int
-    var borrowedBooks: [Book] = []
+    var borrowedBooksCodes: Set<Int> = []
 
     init(name: String, id: Int) {
         self.name = name
