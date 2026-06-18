@@ -48,6 +48,30 @@ struct LibraryOperationSystem {
                             print("Error: \(error)")
                         }
                     case 5:
+                        guard let validName = InputValidator.shared.isNameValid() else {
+                            print("Invalid input.")
+                            return 
+                        }
+                        Library.shared.addMember(name: validName)
+                    case 6: 
+                        guard let validName = InputValidator.shared.isNameValid() else {
+                            print("Invalid input.")
+                            return 
+                        }
+                         guard let validAuthor = InputValidator.shared.isNameValid() else {
+                            print("Invalid input.")
+                            return 
+                        }
+                        Menu.showGenreMenu()
+                        guard let genreChoice = ConsoleHelper.shared.readGenreMenuChoice() else {
+                            continue
+                        }
+                        guard let genre: Genre = Genre(rawValue: genreChoice) else {
+                            print("Invalid genre.")
+                            continue
+                        }
+                        Library.shared.addBook(name: validName, author: validAuthor, genre: genre)
+                    case 7:
                         isRunning = false
                     default: 
                     print("Invalid input.")

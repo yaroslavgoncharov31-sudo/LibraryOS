@@ -29,3 +29,18 @@ func returnBook(bookCode: Int, memberID: Int) throws {
     member.borrowedBooksCodes.remove(book.code)
 }
 }
+
+extension Library {
+    func addMember(name: String) {
+        let newID = members.count + 1
+        let member: Member = Member(name: name, id: newID)
+        self.members.append(member)
+    }
+}
+extension Library {
+    func addBook(name: String, author: String, genre: Genre) {
+        let newCode = books.count + 1
+        let book: Book = Book(code: newCode, name: name, author: author, genre: genre)
+        self.books.append(book)
+    }
+}

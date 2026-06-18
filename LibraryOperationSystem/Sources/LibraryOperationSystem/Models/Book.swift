@@ -13,10 +13,10 @@ class Book {
 }
 
 
-enum Genre {
-    case crimeAndMystery
-    case nonFiction
-    case romance
-    case scienceFiction
-    case biography
+enum Genre: Int {
+    case crimeAndMystery = 1
+    case nonFiction = 2
+    case romance = 3
+    case scienceFiction = 4
+    case biography = 5
 }

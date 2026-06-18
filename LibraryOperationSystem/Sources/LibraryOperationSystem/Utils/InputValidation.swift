@@ -6,7 +6,7 @@ final class InputValidator: Sendable {
     private init() {}
 
     func isNameValid() -> String? {
-        print("Enter the name of the book.")
+        print("Enter the name.")
         guard let input = readLine(), !input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             print("Invalid input.")
             return nil
@@ -33,5 +33,13 @@ final class InputValidator: Sendable {
             return number
 
     }
+     func readGenre() -> Int? {
+        guard let input = readLine(),
+            let number = Int(input) else {
+                print("Invalid input.")
+                return nil
+            }
+            return number
 }
 
+}
