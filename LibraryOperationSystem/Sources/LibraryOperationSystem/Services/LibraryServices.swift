@@ -12,6 +12,7 @@ func borrowBook(bookCode: Int, memberID: Int) throws {
         throw LibraryErrors.alreadyBorrowed
     }
     member.borrowedBooksCodes.insert(book.code)
+    PersistenceService.shared.save(library: self)
 }
 }
 extension Library {
@@ -27,6 +28,7 @@ func returnBook(bookCode: Int, memberID: Int) throws {
 }
 
     member.borrowedBooksCodes.remove(book.code)
+    PersistenceService.shared.save(library: self)
 }
 }
 
@@ -35,6 +37,7 @@ extension Library {
         let newID = members.count + 1
         let member: Member = Member(name: name, id: newID)
         self.members.append(member)
+        PersistenceService.shared.save(library: self)
     }
 }
 extension Library {
@@ -42,5 +45,6 @@ extension Library {
         let newCode = books.count + 1
         let book: Book = Book(code: newCode, name: name, author: author, genre: genre)
         self.books.append(book)
+        PersistenceService.shared.save(library: self)
     }
 }

@@ -2,6 +2,7 @@ struct Menu {
     static func showMainMenu() {
         print("""
         Choose an option:
+
         1. Show all books
         2. Show available books
         3. Borrow book
@@ -14,6 +15,7 @@ struct Menu {
     static func showGenreMenu() {
         print("""
         Choose a genre:
+        
         1. Crime and Mystery
         2. Non-Fiction
         3. Romance

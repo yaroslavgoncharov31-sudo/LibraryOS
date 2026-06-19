@@ -1,6 +1,7 @@
 @main 
 struct LibraryOperationSystem {
    @MainActor static func main() {
+    PersistenceService.shared.load(into: Library.shared)
      showMenu(library: Library.shared)
    }
    @MainActor private static func showMenu(library: Library) {
@@ -13,9 +14,9 @@ struct LibraryOperationSystem {
                 }
                 switch choice {
                     case 1:
-                        print(library.books)
+                       library.books.forEach{ print($0) }
                     case 2:
-                        print(library.availableBooks)
+                        library.availableBooks.forEach{ print($0) }
                     case 3:
                        guard let validBookCode: Int = InputValidator.shared.readBookCode() else {
                             print("Invalid input")
@@ -48,19 +49,19 @@ struct LibraryOperationSystem {
                             print("Error: \(error)")
                         }
                     case 5:
-                        guard let validName = InputValidator.shared.isNameValid() else {
+                        guard let validName = InputValidator.shared.isBookNameValid() else {
                             print("Invalid input.")
-                            return 
+                            continue 
                         }
                         Library.shared.addMember(name: validName)
                     case 6: 
-                        guard let validName = InputValidator.shared.isNameValid() else {
+                        guard let validName = InputValidator.shared.isBookNameValid() else {
                             print("Invalid input.")
-                            return 
+                            continue 
                         }
-                         guard let validAuthor = InputValidator.shared.isNameValid() else {
+                         guard let validAuthor = InputValidator.shared.isAuthorNameValid() else {
                             print("Invalid input.")
-                            return 
+                            continue 
                         }
                         Menu.showGenreMenu()
                         guard let genreChoice = ConsoleHelper.shared.readGenreMenuChoice() else {

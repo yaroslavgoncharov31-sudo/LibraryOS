@@ -19,3 +19,7 @@ class Library {
     }
 }
 
+struct LibraryData: Codable {
+    var books: [Book]
+    var members: [Member]
+}

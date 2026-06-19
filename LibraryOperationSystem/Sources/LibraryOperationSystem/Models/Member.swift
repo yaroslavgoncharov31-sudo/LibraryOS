@@ -1,4 +1,4 @@
-class Member {
+class Member: Codable {
     let name: String
     let id: Int
     var borrowedBooksCodes: Set<Int> = []
