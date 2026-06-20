@@ -12,7 +12,7 @@ struct Menu {
         7. Add a book
         8. Delete member
         9. Delete book
-        10. Exit
+        10.Exit
         """)
     }
     static func showGenreMenu() {

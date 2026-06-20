@@ -1,6 +1,6 @@
 @main 
 struct LibraryOperationSystem {
-   @MainActor static func main() {
+   static func main() {
     PersistenceService.shared.load(into: Library.shared)
      showMenu(library: Library.shared)
    }
@@ -26,11 +26,11 @@ struct LibraryOperationSystem {
                         print("\(index + 1). \(book)")
                         }
                     case 4:
-                       guard let validBookCode: Int = InputValidator.shared.readBookCode() else {
+                       guard let validBookCode: Int = ConsoleHelper.shared.readBookCode() else {
                             print("Invalid input")
                             continue
                        }
-                         guard let validMemberID: Int = InputValidator.shared.readMemberID() else {
+                         guard let validMemberID: Int = ConsoleHelper.shared.readMemberID() else {
                             print("Invalid input")
                             continue
                        }
@@ -42,11 +42,11 @@ struct LibraryOperationSystem {
                         }
                        
                     case 5:
-                        guard let validBookCode: Int = InputValidator.shared.readBookCode() else {
+                        guard let validBookCode: Int = ConsoleHelper.shared.readBookCode() else {
                             print("Invalid input")
                             continue
                        }
-                         guard let validMemberID: Int = InputValidator.shared.readMemberID() else {
+                         guard let validMemberID: Int = ConsoleHelper.shared.readMemberID() else {
                             print("Invalid input")
                             continue
                        }
@@ -57,17 +57,17 @@ struct LibraryOperationSystem {
                             print("Error: \(error.localizedDescription)")
                         }
                     case 6:
-                        guard let validName = InputValidator.shared.isMemberNameValid() else {
+                        guard let validName = ConsoleHelper.shared.isMemberNameValid() else {
                             print("Invalid input.")
                             continue 
                         }
                         Library.shared.addMember(name: validName)
                     case 7: 
-                        guard let validName = InputValidator.shared.isBookNameValid() else {
+                        guard let validName = ConsoleHelper.shared.isBookNameValid() else {
                             print("Invalid input.")
                             continue 
                         }
-                         guard let validAuthor = InputValidator.shared.isAuthorNameValid() else {
+                         guard let validAuthor = ConsoleHelper.shared.isAuthorNameValid() else {
                             print("Invalid input.")
                             continue 
                         }
@@ -85,7 +85,7 @@ struct LibraryOperationSystem {
                             print("Error: \(error.localizedDescription)")
                         }
                     case 8:
-                     guard let validMemberID: Int = InputValidator.shared.readMemberID() else {
+                     guard let validMemberID: Int = ConsoleHelper.shared.readMemberID() else {
                             print("Invalid input")
                             continue
                         }
@@ -95,7 +95,7 @@ struct LibraryOperationSystem {
                             print("Error: \(error.localizedDescription)")
                         }
                     case 9:
-                    guard let validBookCode: Int = InputValidator.shared.readBookCode() else {
+                    guard let validBookCode: Int = ConsoleHelper.shared.readBookCode() else {
                         print("Invalid input.")
                         continue
                     }
