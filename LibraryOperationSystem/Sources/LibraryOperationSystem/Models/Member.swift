@@ -7,5 +7,9 @@ class Member: Codable {
         self.name = name
         self.id = id
     }    
-
+}
+extension Member: CustomStringConvertible {
+    var description: String {
+        "\(name) (ID: \(id)), borrowed: \(borrowedBooksCodes)"
+    }
 }

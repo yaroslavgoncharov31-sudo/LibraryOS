@@ -6,7 +6,7 @@ final class ConsoleHelper: Sendable {
     func readMenuChoice() -> Int? {
         guard let input = readLine(),
               let result = Int(input),
-              result > 0 && result <= 7 else {
+              result > 0 && result <= 10 else {
             print("Invalid input.")
             return nil
         }
@@ -15,7 +15,7 @@ final class ConsoleHelper: Sendable {
     func readGenreMenuChoice() -> Int? {
         guard let input = readLine(),
               let result = Int(input),
-              result > 0 && result <= 7 else {
+              result > 0 && result <= 5 else {
             print("Invalid input.")
             return nil
         }

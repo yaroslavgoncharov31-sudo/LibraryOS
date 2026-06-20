@@ -14,10 +14,18 @@ struct LibraryOperationSystem {
                 }
                 switch choice {
                     case 1:
-                       library.books.forEach{ print($0) }
-                    case 2:
-                        library.availableBooks.forEach{ print($0) }
+                       library.books.enumerated().forEach { index,  book in
+                        print("\(index + 1). \(book)")
+                        }
+                    case 2: 
+                        library.members.enumerated().forEach { index, member in
+                        print("\(index + 1). \(member)")}
+
                     case 3:
+                        library.availableBooks.enumerated().forEach { index, book in
+                        print("\(index + 1). \(book)")
+                        }
+                    case 4:
                        guard let validBookCode: Int = InputValidator.shared.readBookCode() else {
                             print("Invalid input")
                             continue
@@ -30,10 +38,10 @@ struct LibraryOperationSystem {
                             try Library.shared.borrowBook(bookCode: validBookCode, memberID: validMemberID)
                             print("Book borrowed successfully!")
                         } catch {
-                            print("Error: \(error)")
+                            print("Error: \(error.localizedDescription)")
                         }
                        
-                    case 4:
+                    case 5:
                         guard let validBookCode: Int = InputValidator.shared.readBookCode() else {
                             print("Invalid input")
                             continue
@@ -46,15 +54,15 @@ struct LibraryOperationSystem {
                             try Library.shared.returnBook(bookCode: validBookCode, memberID: validMemberID)
                             print("Book returned successfully!")
                         } catch {
-                            print("Error: \(error)")
+                            print("Error: \(error.localizedDescription)")
                         }
-                    case 5:
-                        guard let validName = InputValidator.shared.isBookNameValid() else {
+                    case 6:
+                        guard let validName = InputValidator.shared.isMemberNameValid() else {
                             print("Invalid input.")
                             continue 
                         }
                         Library.shared.addMember(name: validName)
-                    case 6: 
+                    case 7: 
                         guard let validName = InputValidator.shared.isBookNameValid() else {
                             print("Invalid input.")
                             continue 
@@ -71,8 +79,33 @@ struct LibraryOperationSystem {
                             print("Invalid genre.")
                             continue
                         }
-                        Library.shared.addBook(name: validName, author: validAuthor, genre: genre)
-                    case 7:
+                        do {
+                        try Library.shared.addBook(name: validName, author: validAuthor, genre: genre)
+                        } catch {
+                            print("Error: \(error.localizedDescription)")
+                        }
+                    case 8:
+                     guard let validMemberID: Int = InputValidator.shared.readMemberID() else {
+                            print("Invalid input")
+                            continue
+                        }
+                        do {
+                            try Library.shared.deleteMember(id: validMemberID)
+                        } catch {
+                            print("Error: \(error.localizedDescription)")
+                        }
+                    case 9:
+                    guard let validBookCode: Int = InputValidator.shared.readBookCode() else {
+                        print("Invalid input.")
+                        continue
+                    }
+                    do {
+                        try Library.shared.deleteBook(code: validBookCode)
+                    } catch {
+                        print("Error: \(error.localizedDescription)")
+                    }
+
+                    case 10:
                         isRunning = false
                     default: 
                     print("Invalid input.")

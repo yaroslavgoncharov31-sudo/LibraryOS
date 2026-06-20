@@ -3,4 +3,5 @@ enum LibraryErrors: Error {
     case bookNotFound
     case memberNotFound
     case bookNotBorrowedByMember
+    case bookAlreadyExists
 }

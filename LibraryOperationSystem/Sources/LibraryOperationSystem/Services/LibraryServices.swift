@@ -33,18 +33,39 @@ func returnBook(bookCode: Int, memberID: Int) throws {
 }
 
 extension Library {
-    func addMember(name: String) {
-        let newID = members.count + 1
+    func addMember(name: String)  {
+        let newID = (members.map { $0.id }.max() ?? 0) + 1
         let member: Member = Member(name: name, id: newID)
         self.members.append(member)
         PersistenceService.shared.save(library: self)
     }
 }
 extension Library {
-    func addBook(name: String, author: String, genre: Genre) {
-        let newCode = books.count + 1
+    func addBook(name: String, author: String, genre: Genre) throws {
+        let newCode = (books.map { $0.code }.max() ?? 0) + 1
+        guard !books.contains(where: { $0.name == name }) else {
+            throw LibraryErrors.bookAlreadyExists
+        }
         let book: Book = Book(code: newCode, name: name, author: author, genre: genre)
         self.books.append(book)
         PersistenceService.shared.save(library: self)
+    }
+}
+extension Library {
+    func deleteMember(id: Int) throws {
+        guard let index = members.firstIndex(where: { $0.id == id }) else {
+        throw LibraryErrors.memberNotFound
+    }
+    members.remove(at: index)
+    PersistenceService.shared.save(library: self)
+    }
+}
+extension Library {
+    func deleteBook(code: Int) throws {
+        guard let index = books.firstIndex(where: { $0.code == code }) else {
+        throw LibraryErrors.bookNotFound
+    }
+    books.remove(at: index)
+    PersistenceService.shared.save(library: self)
     }
 }
